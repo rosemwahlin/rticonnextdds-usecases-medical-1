@@ -76,7 +76,7 @@ public class ICEAlarmDisplayApp {
 			}
 			
 		} catch (Exception e) {
-			// TODO: Best option for exceptions?
+			// Prints out the exception for the simple example.
 			System.out.println("Exception here");
 		}
 		

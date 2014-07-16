@@ -28,12 +28,24 @@ import com.rti.dds.subscription.ViewStateKind;
 import com.rti.dds.topic.Topic;
 import com.rti.dds.util.Sequence;
 
-// TODO: Better comments
-// A class that receives data of type T.
-//
-// 
-//
-//
+/** 
+ * 
+ * This class is used by the application's DDS interface to receive data
+ * of type 'T'
+ * 
+ * The DataReader is a DDS object responsible for:
+ * <ul>
+ * <li>Receiving data for a Topic, with a specific data type
+ * <li>If a WaitSet is used to receive events (as in this class) the DataReader
+ *  is responsible for notifying the WaitSet of important events, such as data
+ *  availability, discovery of a matched DataWriter, etc..
+ * <li>If callbacks are installed, notifying the user of events via callbacks.
+ *     events include data availability, discovery of a matching writer, etc.
+ * </ul>
+ * 
+ * @author rose
+ *
+ */
 public class GenericDataReader<T> {
 
 	// --- Private members --- //
@@ -64,6 +76,10 @@ public class GenericDataReader<T> {
 			String qosProfile) throws Exception {
 
 		_maxSamplesPerTake = 256;
+		
+		if (communicator == null) {
+			throw new NullPointerException();
+		}
 		_communicator = communicator;
 
 		// --- Creating the Topic for this DataReader --- //
